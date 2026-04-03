@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:orinfitzgerald.com)",
+      "WebFetch(domain:www.metalab.com)",
+      "WebFetch(domain:www.framer.com)",
+      "WebFetch(domain:aisupply.framer.website)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/frontend-design/skills/frontend-design/SKILL.md\")",
+      "Bash(curl:*)",
+      "Bash(mkdir -p \"D:\\\\BACKUP INUL WINDOWS \\(2026\\)\\\\Music\\\\Company Profile cms\\\\cms\\\\src\\\\collections\")",
+      "Bash(mkdir -p \"D:\\\\BACKUP INUL WINDOWS \\(2026\\)\\\\Music\\\\Company Profile cms\\\\cms\\\\src\\\\globals\")",
+      "Bash(rm:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/payload/package.json'\\).version\\)\")",
+      "Bash(node:*)",
+      "Bash(python -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\(list\\(p.get\\('dependencies',{}\\).keys\\(\\)\\)[:20]\\)\")",
+      "Bash(npm view:*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}

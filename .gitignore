@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+cms/node_modules/
+
+# Build output
+dist/
+cms/dist/
+
+# Environment variables (contains secrets)
+.env
+cms/.env
+
+# Uploads (user-uploaded media, should be stored separately)
+cms/uploads/
+
+# OS
+.DS_Store
+Thumbs.db
