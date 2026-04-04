@@ -1,6 +1,6 @@
-import { GlobalConfig } from 'payload/types'
+import type { GlobalConfig } from 'payload'
 
-const SiteSettings: GlobalConfig = {
+export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   label: 'Site Settings',
   access: { read: () => true },
@@ -47,5 +47,3 @@ const SiteSettings: GlobalConfig = {
     },
   ],
 }
-
-export default SiteSettings

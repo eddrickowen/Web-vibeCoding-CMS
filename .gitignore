@@ -5,13 +5,21 @@ cms/node_modules/
 # Build output
 dist/
 cms/dist/
+cms/.next/
 
 # Environment variables (contains secrets)
 .env
 cms/.env
 
-# Uploads (user-uploaded media, should be stored separately)
+# Local media uploads (dev only — production uses Vercel Blob)
+cms/public/media/*
+!cms/public/media/.gitkeep
+
+# Old Payload v1 uploads directory
 cms/uploads/
+
+# Auto-generated Payload files
+cms/src/payload-types.ts
 
 # OS
 .DS_Store

@@ -1,6 +1,6 @@
-import { GlobalConfig } from 'payload/types'
+import type { GlobalConfig } from 'payload'
 
-const Hero: GlobalConfig = {
+export const Hero: GlobalConfig = {
   slug: 'hero',
   label: 'Hero Section',
   access: { read: () => true },
@@ -59,5 +59,3 @@ const Hero: GlobalConfig = {
     },
   ],
 }
-
-export default Hero

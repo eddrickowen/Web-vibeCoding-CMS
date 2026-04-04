@@ -1,12 +1,13 @@
-import { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from 'payload'
 import path from 'path'
 
-const Media: CollectionConfig = {
+export const Media: CollectionConfig = {
   slug: 'media',
   access: { read: () => true },
   upload: {
-    staticDir: path.resolve(__dirname, '../../uploads'),
-    staticURL: '/uploads',
+    // Local fallback when BLOB_READ_WRITE_TOKEN is not set (dev only).
+    // On Vercel, the vercelBlobStorage plugin in payload.config.ts takes over.
+    staticDir: path.join(process.cwd(), 'public/media'),
     imageSizes: [
       {
         name: 'thumbnail',
@@ -39,5 +40,3 @@ const Media: CollectionConfig = {
     },
   ],
 }
-
-export default Media

@@ -1,6 +1,6 @@
-import { GlobalConfig } from 'payload/types'
+import type { GlobalConfig } from 'payload'
 
-const About: GlobalConfig = {
+export const About: GlobalConfig = {
   slug: 'about',
   label: 'About Section',
   access: { read: () => true },
@@ -34,7 +34,7 @@ const About: GlobalConfig = {
       name: 'bodyParagraph1',
       type: 'textarea',
       label: 'Body Paragraph 1',
-      defaultValue: 'Founded in 2009, Meridian Music Group has spent fifteen years at the intersection of artistic vision and commercial intelligence. We work with artists at every stage — from the first demo to the global arena — providing the infrastructure that talent alone can\'t build.',
+      defaultValue: "Founded in 2009, Meridian Music Group has spent fifteen years at the intersection of artistic vision and commercial intelligence. We work with artists at every stage — from the first demo to the global arena — providing the infrastructure that talent alone can't build.",
     },
     {
       name: 'bodyParagraph2',
@@ -44,5 +44,3 @@ const About: GlobalConfig = {
     },
   ],
 }
-
-export default About

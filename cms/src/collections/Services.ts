@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from 'payload'
 
-const Services: CollectionConfig = {
+export const Services: CollectionConfig = {
   slug: 'services',
   access: { read: () => true },
   admin: {
@@ -26,18 +26,18 @@ const Services: CollectionConfig = {
       defaultValue: 'music',
       required: true,
       options: [
-        { label: 'Music / A&R (vinyl record)',        value: 'music' },
-        { label: 'Production (equalizer bars)',        value: 'production' },
-        { label: 'Distribution (globe)',               value: 'distribution' },
-        { label: 'Marketing (cube / hexagon)',         value: 'marketing' },
-        { label: 'Microphone',                         value: 'microphone' },
-        { label: 'Headphones',                         value: 'headphones' },
-        { label: 'Star / Award',                       value: 'star' },
-        { label: 'Chart / Analytics',                  value: 'chart' },
-        { label: 'Handshake / Partnership',            value: 'handshake' },
-        { label: 'Video / Film',                       value: 'video' },
-        { label: 'Broadcast / Radio',                  value: 'broadcast' },
-        { label: 'Dollar / Royalties',                 value: 'dollar' },
+        { label: 'Music / A&R (vinyl record)',   value: 'music' },
+        { label: 'Production (equalizer bars)',   value: 'production' },
+        { label: 'Distribution (globe)',          value: 'distribution' },
+        { label: 'Marketing (cube / hexagon)',    value: 'marketing' },
+        { label: 'Microphone',                    value: 'microphone' },
+        { label: 'Headphones',                    value: 'headphones' },
+        { label: 'Star / Award',                  value: 'star' },
+        { label: 'Chart / Analytics',             value: 'chart' },
+        { label: 'Handshake / Partnership',       value: 'handshake' },
+        { label: 'Video / Film',                  value: 'video' },
+        { label: 'Broadcast / Radio',             value: 'broadcast' },
+        { label: 'Dollar / Royalties',            value: 'dollar' },
       ],
     },
     {
@@ -57,5 +57,3 @@ const Services: CollectionConfig = {
     },
   ],
 }
-
-export default Services

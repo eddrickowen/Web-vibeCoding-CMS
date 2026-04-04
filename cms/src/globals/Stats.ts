@@ -1,6 +1,6 @@
-import { GlobalConfig } from 'payload/types'
+import type { GlobalConfig } from 'payload'
 
-const Stats: GlobalConfig = {
+export const Stats: GlobalConfig = {
   slug: 'stats',
   label: 'Stats Section',
   access: { read: () => true },
@@ -49,5 +49,3 @@ const Stats: GlobalConfig = {
     },
   ],
 }
-
-export default Stats

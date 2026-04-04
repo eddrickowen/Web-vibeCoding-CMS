@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from 'payload'
 
-const Artists: CollectionConfig = {
+export const Artists: CollectionConfig = {
   slug: 'artists',
   access: { read: () => true },
   admin: {
@@ -51,5 +51,3 @@ const Artists: CollectionConfig = {
     },
   ],
 }
-
-export default Artists

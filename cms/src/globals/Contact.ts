@@ -1,6 +1,6 @@
-import { GlobalConfig } from 'payload/types'
+import type { GlobalConfig } from 'payload'
 
-const Contact: GlobalConfig = {
+export const Contact: GlobalConfig = {
   slug: 'contact',
   label: 'Contact Section',
   access: { read: () => true },
@@ -37,5 +37,3 @@ const Contact: GlobalConfig = {
     },
   ],
 }
-
-export default Contact
