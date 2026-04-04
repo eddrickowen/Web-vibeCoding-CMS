@@ -41,13 +41,16 @@ export default buildConfig({
   cors: [
     'http://localhost:5173',
     'http://localhost:4173',
-    // Add your production domain here
-  ],
+    process.env.FRONTEND_URL,
+    process.env.SERVER_URL,
+  ].filter(Boolean) as string[],
 
   csrf: [
     'http://localhost:5173',
     'http://localhost:4173',
-  ],
+    process.env.FRONTEND_URL,
+    process.env.SERVER_URL,
+  ].filter(Boolean) as string[],
 
   upload: {
     limits: {

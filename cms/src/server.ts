@@ -21,6 +21,8 @@ app.use(cors({
   credentials: true,
 }))
 
+app.get('/', (_, res) => res.redirect('/admin'))
+
 let initialized = false
 
 const getApp = async () => {
