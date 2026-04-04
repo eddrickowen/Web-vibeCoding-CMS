@@ -6,8 +6,9 @@ import path from 'path'
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
-// Set config path relative to this file so it works on both local and Vercel
-process.env.PAYLOAD_CONFIG_PATH = path.resolve(__dirname, 'payload.config.js')
+// Use .ts in local dev (ts-node-dev), .js in production (compiled)
+const configExt = process.env.NODE_ENV === 'production' ? 'payload.config.js' : 'payload.config.ts'
+process.env.PAYLOAD_CONFIG_PATH = path.resolve(__dirname, configExt)
 
 const app = express()
 
