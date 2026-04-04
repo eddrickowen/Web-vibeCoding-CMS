@@ -2,24 +2,19 @@
 node_modules/
 cms/node_modules/
 
-# Build output
-dist/
-cms/dist/
+# Next.js build output
 cms/.next/
 
 # Environment variables (contains secrets)
-.env
 cms/.env
 
 # Local media uploads (dev only — production uses Vercel Blob)
 cms/public/media/*
 !cms/public/media/.gitkeep
 
-# Old Payload v1 uploads directory
-cms/uploads/
-
 # Auto-generated Payload files
 cms/src/payload-types.ts
+cms/next-env.d.ts
 
 # OS
 .DS_Store
