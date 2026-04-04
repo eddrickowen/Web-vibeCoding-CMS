@@ -53,8 +53,10 @@ if (process.env.NODE_ENV !== 'production') {
   start()
 }
 
-// Vercel serverless export
-export default async (req: any, res: any) => {
+// Vercel serverless export (module.exports required for CommonJS + @vercel/node)
+const vercelHandler = async (req: any, res: any) => {
   const handler = await getApp()
   return handler(req, res)
 }
+
+module.exports = vercelHandler
