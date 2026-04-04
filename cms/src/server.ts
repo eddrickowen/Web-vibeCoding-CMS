@@ -6,6 +6,9 @@ import path from 'path'
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
+// Set config path relative to this file so it works on both local and Vercel
+process.env.PAYLOAD_CONFIG_PATH = path.resolve(__dirname, 'payload.config.js')
+
 const app = express()
 
 app.use(cors({
