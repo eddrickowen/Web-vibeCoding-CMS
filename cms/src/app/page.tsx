@@ -2,6 +2,8 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import PageClient from '@/components/PageClient'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Page() {
   const payload = await getPayload({ config })
 

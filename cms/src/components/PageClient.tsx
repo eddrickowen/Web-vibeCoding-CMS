@@ -14,10 +14,9 @@ import Stats from './Stats'
 import Contact from './Contact'
 import Footer from './Footer'
 
-gsap.registerPlugin(ScrollTrigger)
-
 export default function PageClient({ data }: { data: any }) {
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const onLoad = () => ScrollTrigger.refresh()
