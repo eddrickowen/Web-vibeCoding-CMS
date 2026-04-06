@@ -9,7 +9,7 @@ export default async function Page() {
 
   const [hero, about, statsData, contact, siteSettings, servicesResult, artistsResult] =
     await Promise.all([
-      payload.findGlobal({ slug: 'hero' }),
+      payload.findGlobal({ slug: 'hero', depth: 1 }),
       payload.findGlobal({ slug: 'about' }),
       payload.findGlobal({ slug: 'stats' }),
       payload.findGlobal({ slug: 'contact' }),
