@@ -57,5 +57,14 @@ export const Hero: GlobalConfig = {
       label: 'Secondary Button Text',
       defaultValue: 'Our Story',
     },
+    {
+      name: 'heroImage',
+      type: 'upload',
+      label: 'Hero Image (right side)',
+      relationTo: 'media',
+      admin: {
+        description: 'Portrait-oriented image displayed on the right side of the hero section.',
+      },
+    },
   ],
 }

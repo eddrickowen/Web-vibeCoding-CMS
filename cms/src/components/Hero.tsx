@@ -12,7 +12,8 @@ export default function Hero({ data = {} }: { data?: any }) {
   const contentRef = useRef<HTMLDivElement>(null)
 
   const label    = data.label     || '— Est. 2009 · Music Group'
-  const heroImg   = data.heroImage || ''
+  const heroImg   = data.heroImage?.url || ''
+  const heroImgAlt = data.heroImage?.alt || 'Artist visual'
   const line1    = data.titleLine1 || 'We shape'
   const line2    = data.titleLine2 || 'sound'
   const line3    = data.titleLine3 || 'into legacy.'
@@ -126,7 +127,7 @@ export default function Hero({ data = {} }: { data?: any }) {
           </div>
         </div>
         <div className="hero-image-col">
-          <HeroImage src={heroImg} alt="Artist visual" />
+          <HeroImage src={heroImg} alt={heroImgAlt} />
         </div>
       </div>
       <div className="hero-scroll" aria-hidden="true">
