@@ -3,12 +3,16 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import HeroImage from './HeroImage'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero({ data = {} }: { data?: any }) {
   const canvasRef  = useRef<HTMLCanvasElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
   const label    = data.label     || '— Est. 2009 · Music Group'
+  const heroImg   = data.heroImage || ''
   const line1    = data.titleLine1 || 'We shape'
   const line2    = data.titleLine2 || 'sound'
   const line3    = data.titleLine3 || 'into legacy.'
@@ -75,10 +79,9 @@ export default function Hero({ data = {} }: { data?: any }) {
       gsap.to('.hero .hero-line-inner', {
         y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.11, delay: 0.2,
       })
-      gsap.fromTo(
+      gsap.from(
         ['.hero-sub', '.hero-ctas'],
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.12, delay: 0.85 }
+        { opacity: 0, y: 20, duration: 0.9, ease: 'power3.out', stagger: 0.12, delay: 0.85 }
       )
       if (content) {
         gsap.to(content, {
@@ -100,25 +103,30 @@ export default function Hero({ data = {} }: { data?: any }) {
       </div>
       <canvas id="particles-canvas" ref={canvasRef} aria-hidden="true" />
       <div className="hero-content" ref={contentRef}>
-        <span className="label hero-label" data-reveal>{label}</span>
-        <h1 className="display-xl hero-title" aria-label={`${line1} ${line2} ${line3}`}>
-          <span className="line-wrap"><span className="hero-line-inner">{line1}</span></span>
-          <span className="line-wrap"><em className="hero-line-inner">{line2}</em></span>
-          <span className="line-wrap"><span className="hero-line-inner">{line3}</span></span>
-        </h1>
-        <p className="body-text hero-sub">
-          {subtitle.split('\n').map((line: string, i: number, arr: string[]) => (
-            <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-          ))}
-        </p>
-        <div className="hero-ctas">
-          <a href="#artists" className="btn btn--primary" data-magnetic>{cta1Text}</a>
-          <a href="#about" className="btn btn--text" aria-label="Our story">
-            {cta2Text}
-            <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false">
-              <path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+        <div className="hero-text-col">
+          <span className="label hero-label" data-reveal>{label}</span>
+          <h1 className="display-xl hero-title" aria-label={`${line1} ${line2} ${line3}`}>
+            <span className="line-wrap"><span className="hero-line-inner">{line1}</span></span>
+            <span className="line-wrap"><em className="hero-line-inner">{line2}</em></span>
+            <span className="line-wrap"><span className="hero-line-inner">{line3}</span></span>
+          </h1>
+          <p className="body-text hero-sub">
+            {subtitle.split('\n').map((line: string, i: number, arr: string[]) => (
+              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+            ))}
+          </p>
+          <div className="hero-ctas">
+            <a href="#artists" className="btn btn--primary" data-magnetic>{cta1Text}</a>
+            <a href="#about" className="btn btn--text" aria-label="Our story">
+              {cta2Text}
+              <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+                <path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div className="hero-image-col">
+          <HeroImage src={heroImg} alt="Artist visual" />
         </div>
       </div>
       <div className="hero-scroll" aria-hidden="true">

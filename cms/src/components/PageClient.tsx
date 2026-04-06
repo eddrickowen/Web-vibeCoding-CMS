@@ -4,6 +4,9 @@ import { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+// Register before any child component useEffect can run
+gsap.registerPlugin(ScrollTrigger)
+
 import Cursor from './Cursor'
 import Nav from './Nav'
 import Hero from './Hero'
@@ -16,13 +19,27 @@ import Footer from './Footer'
 
 export default function PageClient({ data }: { data: any }) {
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const onLoad = () => ScrollTrigger.refresh()
     window.addEventListener('load', onLoad)
 
+    // Safety fallback: if GSAP animations don't fire within 3s, force-show all hidden elements
+    const safetyTimer = setTimeout(() => {
+      document.querySelectorAll<HTMLElement>('[data-reveal]').forEach(el => {
+        el.style.opacity = '1'
+        el.style.transform = 'none'
+      })
+      document.querySelectorAll<HTMLElement>('.hero-line-inner').forEach(el => {
+        el.style.transform = 'translateY(0)'
+      })
+      document.querySelectorAll<HTMLElement>('.hero-sub, .hero-ctas').forEach(el => {
+        el.style.opacity = '1'
+      })
+    }, 3000)
+
     if (prefersReduced) {
+      clearTimeout(safetyTimer)
       document.querySelectorAll<HTMLElement>('[data-reveal]').forEach(el => {
         el.style.opacity = '1'
         el.style.transform = 'none'
@@ -44,7 +61,7 @@ export default function PageClient({ data }: { data: any }) {
             ease: 'power3.out',
             scrollTrigger: {
               trigger: el,
-              start: 'top 88%',
+              start: 'top 92%',
               once: true,
             },
           }
@@ -71,6 +88,7 @@ export default function PageClient({ data }: { data: any }) {
     })
 
     return () => {
+      clearTimeout(safetyTimer)
       window.removeEventListener('load', onLoad)
       ctx.revert()
       magneticHandlers.forEach(({ el, moveHandler, leaveHandler }) => {

@@ -461,6 +461,130 @@ body {
   transform: translateY(105%);
 }
 
+/* Hero two-column split */
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 80px);
+}
+
+.hero-text-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-image-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── HeroImage component ─────────────────────── */
+.hero-img-outer {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-img-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  clip-path: inset(0 100% 0 0);
+}
+
+.hero-img-inner {
+  position: absolute;
+  inset: -8%;
+  will-change: transform;
+}
+
+.hero-img-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: saturate(0.85) contrast(1.05);
+}
+
+/* Grain overlay matching site noise */
+.hero-img-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Bottom vignette with accent tint */
+.hero-img-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 45%,
+    rgba(8, 13, 10, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* Decorative corner marks */
+.hero-img-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-img-corner--tl {
+  top: -8px;
+  left: -8px;
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+}
+
+.hero-img-corner--br {
+  bottom: -8px;
+  right: -8px;
+  border-bottom: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+}
+
+/* Meta label row below image */
+.hero-img-meta {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 12px;
+  opacity: 0.5;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-image-col {
+    order: -1;
+  }
+
+  .hero-img-outer {
+    max-width: 340px;
+  }
+
+  .hero-img-frame {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 /* ═══════════════════════════════════════════════
    8. ABOUT
 ═══════════════════════════════════════════════ */
@@ -818,5 +942,28 @@ body {
 
   .hero-line-inner {
     transform: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   17. NO-JS / SCRIPTING DISABLED FALLBACKS
+═══════════════════════════════════════════════ */
+@media (scripting: none) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  .hero-line-inner {
+    transform: translateY(0) !important;
+  }
+  .hero-sub, .hero-ctas {
+    opacity: 1 !important;
+  }
+}
+
+/* Fallback for browsers that don't support svh */
+@supports not (min-height: 1svh) {
+  .hero {
+    min-height: 100vh;
   }
 }

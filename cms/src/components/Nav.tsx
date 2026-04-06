@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+gsap.registerPlugin(ScrollTrigger)
+
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@'
 const scrambleTimers = new Map<Element, ReturnType<typeof setInterval>>()
 
