@@ -52,6 +52,7 @@ export default function Stats({ data = {} }: { data?: any }) {
             const idx = refs.current.indexOf(entry.target as HTMLSpanElement)
             if (idx === -1) return
             animateCounter(entry.target as HTMLElement, STATS[idx].target, STATS[idx].suffix)
+            observer.unobserve(entry.target)
           }
         })
       },

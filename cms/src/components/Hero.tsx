@@ -8,8 +8,9 @@ import HeroImage from './HeroImage'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero({ data = {} }: { data?: any }) {
-  const canvasRef  = useRef<HTMLCanvasElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
+  const canvasRef   = useRef<HTMLCanvasElement>(null)
+  const contentRef  = useRef<HTMLDivElement>(null)
+  const textColRef  = useRef<HTMLDivElement>(null)
 
   const label    = data.label     || '— Est. 2009 · Music Group'
   const heroImg   = data.heroImage?.url || ''
@@ -24,7 +25,8 @@ export default function Hero({ data = {} }: { data?: any }) {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d')!
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
     const COUNT = 55
     let W = 0, H = 0, rafId = 0
 
@@ -65,7 +67,7 @@ export default function Hero({ data = {} }: { data?: any }) {
     let resizeTimer: ReturnType<typeof setTimeout>
     const onResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150) }
     window.addEventListener('resize', onResize)
-    return () => { cancelAnimationFrame(rafId); window.removeEventListener('resize', onResize) }
+    return () => { cancelAnimationFrame(rafId); clearTimeout(resizeTimer); window.removeEventListener('resize', onResize) }
   }, [])
 
   useEffect(() => {
@@ -84,8 +86,8 @@ export default function Hero({ data = {} }: { data?: any }) {
         ['.hero-sub', '.hero-ctas'],
         { opacity: 0, y: 20, duration: 0.9, ease: 'power3.out', stagger: 0.12, delay: 0.85 }
       )
-      if (content) {
-        gsap.to(content, {
+      if (textColRef.current) {
+        gsap.to(textColRef.current, {
           y: '28%', ease: 'none',
           scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true },
         })
@@ -104,7 +106,7 @@ export default function Hero({ data = {} }: { data?: any }) {
       </div>
       <canvas id="particles-canvas" ref={canvasRef} aria-hidden="true" />
       <div className="hero-content" ref={contentRef}>
-        <div className="hero-text-col">
+        <div className="hero-text-col" ref={textColRef}>
           <span className="label hero-label" data-reveal>{label}</span>
           <h1 className="display-xl hero-title" aria-label={`${line1} ${line2} ${line3}`}>
             <span className="line-wrap"><span className="hero-line-inner">{line1}</span></span>

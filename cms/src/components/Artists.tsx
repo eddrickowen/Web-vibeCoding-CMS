@@ -9,7 +9,7 @@ function getMediaURL(image: any): string {
 
 function ArtistCard({ artist, delay }: { artist: any; delay: number }) {
   const imgSrc = getMediaURL(artist.image)
-  const altText = artist.image?.alt || `${artist.name} — ${artist.genre}`
+  const altText = artist.image?.alt || [artist.name, artist.genre].filter(Boolean).join(' — ') || 'Artist'
 
   return (
     <article className="artist-card" data-reveal data-reveal-delay={delay}>

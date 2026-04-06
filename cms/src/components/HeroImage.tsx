@@ -19,17 +19,23 @@ export default function HeroImage({
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReduced) return
 
-    gsap.fromTo(
-      frameRef.current,
-      { clipPath: 'inset(0 100% 0 0)' },
-      { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'power4.inOut', delay: 0.75 },
-    )
+    gsap.set(frameRef.current, { clipPath: 'inset(0 100% 0 0)' })
+    const tween = gsap.to(frameRef.current, {
+      clipPath: 'inset(0 0% 0 0)',
+      duration: 1.4,
+      ease: 'power4.inOut',
+      delay: 0.75,
+    })
+    return () => { tween.kill() }
   }, [])
 
   // 3D mouse-tilt + inner parallax
   useEffect(() => {
     const el = outerRef.current
     if (!el) return
+
+    // Set perspective once rather than on every tween
+    gsap.set(el, { transformPerspective: 1100 })
 
     const onMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect()
@@ -41,7 +47,6 @@ export default function HeroImage({
         rotateX: -dy * 6,
         duration: 0.55,
         ease: 'power3.out',
-        transformPerspective: 1100,
       })
       gsap.to(innerRef.current, {
         x: dx * 12,
@@ -82,7 +87,8 @@ export default function HeroImage({
       {/* Decorative offset frame */}
       <div className="hero-img-frame" ref={frameRef}>
         <div className="hero-img-inner" ref={innerRef}>
-          <img src={imageSrc} alt={alt || 'Artist'} className="hero-img-photo" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={imageSrc} alt={alt || 'Artist'} className="hero-img-photo" loading="eager" fetchPriority="high" />
           {/* Grain overlay */}
           <div className="hero-img-grain" aria-hidden="true" />
           {/* Vignette */}
